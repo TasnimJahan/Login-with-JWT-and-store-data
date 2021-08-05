@@ -1,0 +1,108 @@
+table,th,td,tr{
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+}
+th{
+    width:10em;
+}
+.allUserDiv{
+    /* border:2px solid red; */
+}
+.allUser label,input{
+    width:45%;
+    margin-left: 3%;
+}
+.headSection{
+    /* border: 1px solid red; */
+    margin-bottom: 5%;
+    margin-top: 2%;
+    width: 90%;
+}
+.allUser h2 {
+    text-align: left;
+    /* border: 1px solid red; */
+}
+.form.allUser {
+    /* margin-left: 20%; */
+    top: 0;
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 2%;
+    /* position: absolute; */
+}
+.allUser input{
+    width: 77%;
+    margin-left: 3%;
+    border: none;
+    border-top: 1px solid grey;
+    border-radius: 10px;
+    background: #f3c247;;
+}
+#submitBtn {
+    border: 2px solid blue;
+    width: 7rem;
+    height: 2rem;
+    margin-top: 5%;
+    background: greenyellow;
+    border-radius: 20px;
+    margin-left: 5%;
+}
+#review{
+    border: 2px solid blue;
+    height: 10rem;
+}
+.allUser form {
+    display: flex;
+    flex-wrap: wrap;
+    width: 78%;
+    margin-bottom: 3%;
+    box-shadow: 10px 10px 20px grey;
+    border-radius: 10px;
+    palling: 2%;
+    background-image:  linear-gradient(
+        40deg
+        , #ff07a7,#ff5722);
+    color: white;
+    font-size: 1.3rem;
+}
+span.reviewSection {
+    /* margin-left: -56%; */
+}
+span.priceSection{
+    /* border: 1px solid blue; */
+    margin-left: -62%;
+}
+span.nameSection,.reviewSection{
+    /* border: 1px solid blue; */
+    margin-left: 2%;
+}
+span.review{
+    /* border: 1px solid blue; */
+    margin-left: -48%;
+}
+@media (max-width: 688px){
+    #submit{
+        margin-top:0%!important;
+        width: 30%!important;
+    }
+    .allUser form {
+        display: inline-block;
+        width: 78%;
+        margin-top: 1%important;
+        box-shadow: 10px 10px 20px grey;
+        border-radius: 10px;
+        palling: 2%;
+        background: #d6282f;
+        color: white;
+        font-size: 1rem;
+    }
+    
+.allUser input{
+    width: 100%!important;
+}
+.allUser label{
+    width: 75%!important;
+    margin-left: 0%!important;
+}
+}

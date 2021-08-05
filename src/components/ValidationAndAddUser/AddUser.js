@@ -4,8 +4,24 @@ import PopupBox from './PopupBox';
 
 const AddUser = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const togglePopup = () => {
-    setIsOpen(!isOpen);
+
+  // const togglePopup = () => {
+  //   setIsOpen(!isOpen);
+  // }
+
+
+  const openPopup = () => {
+    if(validAddress && validEmail && validMobile && validUser){
+      setIsOpen(true);
+    }
+    else{
+      setIsOpen(false);
+    }
+  }
+
+  const closePopup = () => {  
+      setIsOpen(false);
+      handleSubmit();
   }
 
   const [user,setUser]= useState({
@@ -22,15 +38,6 @@ const AddUser = () => {
   const [validAddress,setValidAddress] = useState(false)
 
 
-    // Handle error
-    const handleError = ()=> {
-        // const passwordValue = document.getElementById("password").value;
-        // const confirmPasswordValue = document.getElementById("confirmPassword").value;
-        // const unMatchPassword = document.getElementById("unMatchPassword");
-        // if (passwordValue !== confirmPasswordValue) {
-        //   unMatchPassword.style.display ="block";
-        // }
-      }
 
        //Handle blur
     const handleBlur=(event)=>{
@@ -117,19 +124,40 @@ const AddUser = () => {
             // document.getElementById("inValidUserName").style.display="none";   
           }
         }
-
-
         if(isFormValid) {
           const newUserInfo = {...user, [event.target.name] : event.target.value};
           setUser(newUserInfo);
           setAllDone(true);
         }
-        console.log("user",user);
-        console.log(allDone);
+        // console.log("user",user);
+        // console.log(allDone);
       }
 
 
-    const handleSubmit = (e)=>{
+
+      const handleSubmit =() => {
+        const userData = {
+          name: user.userName,
+          email: user.email,
+          mobile: user.mobile,
+          address: user.address
+      }
+      const url = `http://localhost:5000/addUser`;
+      fetch(url, {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(userData)
+      })
+      .then(response => console.log("server side response", response));
+      window.location.reload() ;
+    }
+
+
+
+
+    // const handleSubmit = (e)=>{
         // e.preventDefault(); 
         // // for a new user
         // if(newUser && user.email && user.password){
@@ -150,7 +178,7 @@ const AddUser = () => {
         //       setUser(newUserInfo);
         //     });
         //   console.log("Form submitted");
-        }
+        // }
     return (
         <div className="addUserFrom">
              {/* addUser form     */}
@@ -164,10 +192,10 @@ const AddUser = () => {
                     <br/>
                     <input type="text"  onBlur={handleBlur} name="address" id="address" placeholder="Your Address" required/>
 
-                    {
-                     validAddress && validEmail && validMobile && validUser &&
-                        <button  onClick={togglePopup}  className="loginBtn btn " style={{backgroundColor: '#673ab7'}}><input className="addUserSubmit" type="submit" value="Add this User" /></button>
-                    }
+                    {/* {
+                     validAddress && validEmail && validMobile && validUser && */}
+                        <button  onClick={openPopup}  className="loginBtn btn " style={{backgroundColor: '#673ab7'}}><input className="addUserSubmit" type="submit" value="Add this User" /></button>
+                    {/* } */}
 
                 {/* </form> */}
                 
@@ -181,15 +209,11 @@ const AddUser = () => {
                 {isOpen && <PopupBox
                   content={<>
                     <b>Design your Popup</b>
-                    <p style={{color:'Green', fontSize:'bold'}}>USER SUCCESSFULLY ADDED.</p>
-                    <button onClick={togglePopup}>OK</button>
+                    <p style={{color:'Green', fontSize:'bold'}}>USER ADDED SUCCESSFULLY.</p>
+                    <button onClick={closePopup}>OK</button>
                   </>}
-                  handleClose={togglePopup}
+                  handleClose={closePopup}
                 />}
-                {/* <h3 style={{color:'red'}}>{user.error}</h3> */}
-                {/* {
-                    user.success && <h3 style={{color:'green'}}>User Created successfully</h3>
-                } */}
             </div>   
         </div>
     );

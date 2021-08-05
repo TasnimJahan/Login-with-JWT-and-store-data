@@ -6,7 +6,7 @@ import { faPen,faPlus,faThLarge } from '@fortawesome/free-solid-svg-icons'
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import AddUser from './AddUser';
 import './ValidationAndAddUser.css'
-import AllUser from './AllUser';
+import AllUser from './UserList/AllUser/AllUser';
 
 const ValidationAndAddUser = () => {
     const handleAdd=()=>{
