@@ -1,0 +1,39 @@
+.screen2 {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+}
+#AddUserDiv{
+    /* display:none; */
+    /* margin-left: 20%; */
+}
+#AllUserDiv{
+    display:none;
+    /* margin-left: 20%; */
+}
+.sidenav---sidenav---_2tBP {
+    background: #673ab7!important;
+}
+
+.sidenavDiv {
+    /* width: 20%; */
+}
+.sidenav---sidenav---_2tBP.sidenav---expanded---1KdUL {
+    min-width: 20%!important;
+    width: fit-content;
+}
+.tab{
+    display:flex;
+    align-items: center;
+}
+
+@media (max-width: 688px){
+    .sidenav---sidenav---_2tBP.sidenav---expanded---1KdUL {
+        min-width: 45%!important;
+        width: fit-content;
+    }
+    .tab {
+        margin-left: 20%;
+    }
+}
