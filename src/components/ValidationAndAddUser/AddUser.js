@@ -31,7 +31,7 @@ const AddUser = () => {
     address:''
   })
 
-  const [allDone,setAllDone] = useState(false)
+  
   const [validUser,setValidUser] = useState(false)
   const [validEmail,setValidEmail] = useState(false)
   const [validMobile,setValidMobile] = useState(false)
@@ -127,10 +127,8 @@ const AddUser = () => {
         if(isFormValid) {
           const newUserInfo = {...user, [event.target.name] : event.target.value};
           setUser(newUserInfo);
-          setAllDone(true);
         }
         // console.log("user",user);
-        // console.log(allDone);
       }
 
 

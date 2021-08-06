@@ -1,51 +1,73 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useContext } from 'react';
+import { UserContext } from '../../App';
 import './Login.css'
 
 const Login = () => {
-    // Handle error
-    const handleError = ()=> {
+    const [loggedInUser,setLoggedInUser]= useContext(UserContext);
+
+    const [userMail,setUserMail] = useState([]);
+    const [userPassword,setUserPassword] = useState([]);
+    const [user,setUser] = useState([]);
+    
+    const handleSubmit =(e) => {
+        e.preventDefault();
+
+        console.log("users are", user);
+        
+        const userData = {
+          email: user.email,
+          password: user.password
+      }
+      const url = `http://localhost:5000/login`;
+      fetch(url, {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(userData)
+      })
+      .then(response => console.log("server side response", response));
+    //   window.location.reload() ;
+    }
+
+
+
+    //handle login 
+    const handleLogin = (e) => {
+        e.preventDefault();
+        console.log("The user",user);
+        setLoggedInUser(user);
+        console.log("loggedInUser",loggedInUser);
+        console.log("loggedInUser.email",loggedInUser?.email);
+        // window.location.href='/addUser'
+    }
+
+// Handle error
+    // const handleError = ()=> {
         // const passwordValue = document.getElementById("password").value;
         // const confirmPasswordValue = document.getElementById("confirmPassword").value;
         // const unMatchPassword = document.getElementById("unMatchPassword");
         // if (passwordValue !== confirmPasswordValue) {
         //   unMatchPassword.style.display ="block";
         // }
-      }
+    //   }
 
        //Handle blur
     const handleBlur=(event)=>{
-        // let isFormValid=true;
-        // if (event.target.name ==='email') {
-        //   const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        //   isFormValid =  re.test(String(event.target.value).toLowerCase());
-        //   const isFormValid2 =  re.test(String(event.target.value).toLowerCase());
-        //   if(!isFormValid2){
-        //     document.getElementById("inValidMail").style.display="block";
-        //     document.getElementById("inValidPassword").style.display = "none";
-        //     document.getElementById("unMatchPassword").style.display="none";
-        //   }
-        // }
-        // if (event.target.name === 'password') {
-        //   const isPasswordValid = event.target.value.length >6;
-        //   const passHasNumber = /\d{1}/.test(event.target.value);
-        //   const passwordValue = document.getElementById("password").value;
-        //   const confirmPasswordValue = document.getElementById("confirmPassword").value
-        //   const isPasswordSame = passwordValue === confirmPasswordValue;
-        //   if(!isPasswordValid || !passHasNumber){
-        //     document.getElementById("inValidPassword").style.display = "block";
-        //     document.getElementById("unMatchPassword").style.display="none";
-        //     document.getElementById("inValidMail").style.display="none";    
-        //   }
-        //   isFormValid = isPasswordValid && passHasNumber && isPasswordSame;
-        // }
-        // if(isFormValid) {
-        //   const newUserInfo = {...user, [event.target.name] : event.target.value};
-        //   setUser(newUserInfo);
-        // }
+            if (event.target.name ==='email') {
+                setUserMail(event.target.value);
+            }
+            if (event.target.name === 'password') {
+                setUserPassword(event.target.value);
+            }
+            
+            const newUserInfo = {...user, [event.target.name] : event.target.value};
+            setUser(newUserInfo);
       }
 
 
-    const handleSubmit = (e)=>{
+    // const handleSubmit = (e)=>{
         // e.preventDefault(); 
         // // for a new user
         // if(newUser && user.email && user.password){
@@ -66,7 +88,7 @@ const Login = () => {
         //       setUser(newUserInfo);
         //     });
         //   console.log("Form submitted");
-        }
+        // }
     return (
         <div>
             {/* Login Form */}
@@ -76,14 +98,10 @@ const Login = () => {
                     <input type="email" onBlur={handleBlur} name="email" id="" placeholder="Email" required/>
                     <br/>
                     <input type="password" onBlur={handleBlur} name="password" id="" placeholder="Password" required/>          
-                    <button onClick={handleError} className="loginBtn btn btn-warning"><input type="submit" value="Login"/></button>
+                    <button onClick={handleLogin} className="loginBtn btn btn-warning"><input type="submit" value="Login"/></button>
                 </form>
                 <h5 id="inValidMail" style={{color:'red', textAlign:'center'}}>Please give a correct email address</h5>
                 <h5 id="inValidPassword" style={{color:'red', textAlign:'center'}}>Please give the correct password</h5>
-                {/* <h3 style={{color:'red'}}>{user.error}</h3>
-                {
-                    user.success && <h3 style={{color:'green'}}>User Logged in successfully</h3>
-                } */}
              </div>
         </div>
     );
